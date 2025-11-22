@@ -1,7 +1,6 @@
-
 {
-  "name": "Math 24 Daily Challenge",
-  "short_name": "Math 24",
+  "name": "24点",
+  "short_name": "24点",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#EFF6FF",

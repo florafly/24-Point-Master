@@ -1,3 +1,4 @@
+
 export enum Suit {
   Hearts = '♥',
   Diamonds = '♦',
@@ -23,8 +24,17 @@ export type Operator = '+' | '-' | '*' | '/' | '(' | ')';
 
 export type Difficulty = 'Easy' | 'Hard';
 
+export type Language = 'en' | 'zh';
+
 export interface SolverResult {
   solvable: boolean;
   solution?: string;
   firstStepHint?: string; // e.g. "Try adding 5 and 3"
+}
+
+export interface ExpressionToken {
+  id: string;
+  type: 'number' | 'operator';
+  value: string;
+  cardId?: string; // Only for number tokens derived from cards
 }

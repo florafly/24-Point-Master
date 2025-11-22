@@ -80,10 +80,6 @@ export const solve24 = (numbers: number[]): SolverResult => {
           // Skip division by zero
           if (operation.op === '/' && Math.abs(b.val) < EPSILON) continue;
 
-          // Commutative optimization: for + and *, only do it if i < j to avoid dupes? 
-          // Actually, strictly speaking we need full permutation because a-b != b-a.
-          // But for + and *, a+b == b+a. We can optimize, but loop is small enough.
-
           const newVal = operation.func(a.val, b.val);
           
           // Build new expression string with correct parens
@@ -92,10 +88,8 @@ export const solve24 = (numbers: number[]): SolverResult => {
 
           // Add parens if child op has lower precedence than current op
           // or if equal precedence and right side is minus/divide (associativity)
-          // Simplify: Wrap if child level < current level.
           if (a.opLevel > 0 && a.opLevel < operation.level) leftStr = `(${leftStr})`;
           
-          // Special care for right operand with - and /
           if (b.opLevel > 0 && (b.opLevel < operation.level || (b.opLevel === operation.level && (operation.op === '-' || operation.op === '/')))) {
             rightStr = `(${rightStr})`;
           }
@@ -126,36 +120,35 @@ export const solve24 = (numbers: number[]): SolverResult => {
   }
 
   // Extract a "First Step" hint
-  // We need to find a node where both children are leaf nodes (level 0)
-  // Or effectively, traverse down to the bottom-most operation.
   const findFirstOperation = (node: ExprNode): string => {
     if (!node.left || !node.right) return "";
     
     // If both children are original numbers (no operations in them), this is a first step.
     if (!node.left.left && !node.right.left) {
-      const opName = node.opStr === '+' ? 'adding' : 
-                     node.opStr === '-' ? 'subtracting' :
-                     node.opStr === '*' ? 'multiplying' : 'dividing';
-      // Ensure we mention numbers in order for subtraction/division
-      return `Try ${opName} ${node.left.val} and ${node.right.val}`;
+      // Display format: "5 + 3"
+      const opSymbol = node.opStr === '*' ? '×' : node.opStr === '/' ? '÷' : node.opStr;
+      return `${node.left.val} ${opSymbol} ${node.right.val}`;
     }
 
-    // Recursively search children
     const leftResult = findFirstOperation(node.left);
     if (leftResult) return leftResult;
     
     return findFirstOperation(node.right);
   };
 
+  // Pretty print the full solution (replace * / with × ÷)
+  const prettySolution = root.str
+    .replace(/\*/g, '×')
+    .replace(/\//g, '÷');
+
   return {
     solvable: true,
-    solution: root.str,
+    solution: prettySolution,
     firstStepHint: findFirstOperation(root)
   };
 };
 
 export const drawCards = (count: number, difficulty: Difficulty): PlayingCard[] => {
-  // Safety break counter to prevent infinite loops if logic is broken
   let attempts = 0;
   while (attempts < 100) {
     const deck = generateDeck(difficulty);
@@ -172,13 +165,13 @@ export const drawCards = (count: number, difficulty: Difficulty): PlayingCard[] 
     attempts++;
   }
   
-  // Fallback (should rarely happen with standard deck)
   return generateDeck(difficulty).slice(0, count);
 };
 
 // Safe evaluation of mathematical expression
 export const evaluateExpression = (expression: string): number | null => {
   try {
+    // Keep basic math symbols for evaluation
     const sanitized = expression.replace(/[^0-9+\-*/().\s]/g, '');
     if (!sanitized) return null;
     
