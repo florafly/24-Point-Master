@@ -213,12 +213,12 @@ const App: React.FC = () => {
     <span className="inline-block w-0.5 h-8 bg-blue-600 animate-blink align-middle relative -top-0.5 mx-[1px] pointer-events-none rounded-full"></span>
   );
 
-  // Operator button data for loop
+  // Operator button data for loop - UPDATED COLORS to be more pastel/toy-like
   const operatorButtons = [
-    { op: '+', color: 'bg-green-100 text-green-600 border-green-200' },
-    { op: '-', color: 'bg-red-100 text-red-600 border-red-200' },
-    { op: '*', label: '×', color: 'bg-purple-100 text-purple-600 border-purple-200' },
-    { op: '/', label: '÷', color: 'bg-orange-100 text-orange-600 border-orange-200' },
+    { op: '+', color: 'bg-green-100 text-green-600 border-green-200 hover:bg-green-200' },
+    { op: '-', color: 'bg-rose-100 text-rose-500 border-rose-200 hover:bg-rose-200' },
+    { op: '*', label: '×', color: 'bg-purple-100 text-purple-500 border-purple-200 hover:bg-purple-200' },
+    { op: '/', label: '÷', color: 'bg-amber-100 text-amber-600 border-amber-200 hover:bg-amber-200' },
   ];
 
   return (
@@ -226,9 +226,9 @@ const App: React.FC = () => {
       {showConfetti && <Confetti />}
 
       {/* Top Bar: Settings & Timer */}
-      <div className="w-full flex justify-between items-center mb-2 px-1">
+      <div className="w-full flex justify-between items-center mb-4 px-1">
         <div className="flex items-center gap-2">
-           <div className="bg-white px-3 py-1 rounded-full shadow-sm text-blue-600 font-bold font-mono text-sm border border-blue-100">
+           <div className="bg-white px-4 py-2 rounded-full shadow-sm text-gray-600 font-bold font-mono text-lg border-2 border-gray-100">
              {Math.floor(timer / 60)}:{(timer % 60).toString().padStart(2, '0')}
            </div>
         </div>
@@ -236,31 +236,31 @@ const App: React.FC = () => {
         <div className="flex gap-2">
           <button 
             onClick={() => { playSound('click'); setShowHelp(true); }}
-            className="p-2 bg-white hover:bg-blue-50 text-blue-500 rounded-full shadow-sm border border-blue-100 transition active:scale-90"
+            className="w-10 h-10 bg-white hover:bg-blue-50 text-blue-400 rounded-full shadow-sm border-2 border-gray-100 transition active:scale-90 flex items-center justify-center"
           >
-            <HelpCircle size={20} />
+            <HelpCircle size={22} />
           </button>
           <div className="relative">
             <button 
               onClick={() => { playSound('click'); setShowDifficultyMenu(!showDifficultyMenu); }}
-              className="p-2 bg-white hover:bg-blue-50 text-blue-500 rounded-full shadow-sm border border-blue-100 transition active:scale-90"
+              className="w-10 h-10 bg-white hover:bg-blue-50 text-blue-400 rounded-full shadow-sm border-2 border-gray-100 transition active:scale-90 flex items-center justify-center"
             >
-              <Settings size={20} />
+              <Settings size={22} />
             </button>
             {showDifficultyMenu && (
               <>
               <div className="fixed inset-0 z-40" onClick={() => setShowDifficultyMenu(false)}></div>
-              <div className="absolute right-0 top-12 bg-white shadow-xl rounded-2xl p-2 min-w-[180px] border border-blue-100 z-50 animate-pop origin-top-right">
-                <button onClick={() => changeDifficulty('Easy')} className={`w-full text-left px-4 py-3 rounded-xl text-sm font-bold transition mb-1 flex items-center justify-between ${difficulty === 'Easy' ? 'bg-blue-50 text-blue-600' : 'text-gray-600'}`}>
-                  {t.easy} {difficulty === 'Easy' && <CheckCircle size={16} />}
+              <div className="absolute right-0 top-12 bg-white shadow-xl rounded-3xl p-3 min-w-[200px] border-4 border-blue-100 z-50 animate-pop origin-top-right">
+                <button onClick={() => changeDifficulty('Easy')} className={`w-full text-left px-4 py-3 rounded-2xl text-sm font-bold transition mb-2 flex items-center justify-between ${difficulty === 'Easy' ? 'bg-blue-50 text-blue-600' : 'text-gray-500 hover:bg-gray-50'}`}>
+                  {t.easy} {difficulty === 'Easy' && <CheckCircle size={18} />}
                 </button>
-                <button onClick={() => changeDifficulty('Hard')} className={`w-full text-left px-4 py-3 rounded-xl text-sm font-bold transition mb-1 flex items-center justify-between ${difficulty === 'Hard' ? 'bg-blue-50 text-blue-600' : 'text-gray-600'}`}>
-                  {t.hard} {difficulty === 'Hard' && <CheckCircle size={16} />}
+                <button onClick={() => changeDifficulty('Hard')} className={`w-full text-left px-4 py-3 rounded-2xl text-sm font-bold transition mb-2 flex items-center justify-between ${difficulty === 'Hard' ? 'bg-blue-50 text-blue-600' : 'text-gray-500 hover:bg-gray-50'}`}>
+                  {t.hard} {difficulty === 'Hard' && <CheckCircle size={18} />}
                 </button>
-                <div className="h-px bg-gray-100 my-1 mx-2"></div>
-                <button onClick={toggleLanguage} className="w-full text-left px-4 py-3 rounded-xl text-sm font-bold transition text-gray-600 flex items-center justify-between">
-                  <span className="flex items-center gap-2"><Languages size={16} /> {t.language}</span>
-                  <span className="text-xs bg-gray-100 px-2 py-0.5 rounded text-gray-500">{language === 'en' ? 'EN' : '中文'}</span>
+                <div className="h-0.5 bg-gray-100 my-2 mx-2 rounded-full"></div>
+                <button onClick={toggleLanguage} className="w-full text-left px-4 py-3 rounded-2xl text-sm font-bold transition text-gray-500 hover:bg-gray-50 flex items-center justify-between">
+                  <span className="flex items-center gap-2"><Languages size={18} /> {t.language}</span>
+                  <span className="text-xs bg-gray-100 px-2 py-1 rounded-lg text-gray-500 border border-gray-200">{language === 'en' ? 'EN' : '中文'}</span>
                 </button>
               </div>
               </>
@@ -269,38 +269,40 @@ const App: React.FC = () => {
         </div>
       </div>
 
-      {/* Stats Header */}
-      <div className="w-full flex justify-between items-stretch mb-4 gap-3">
+      {/* Stats Header - Colorful Cards */}
+      <div className="w-full flex justify-between items-stretch mb-4 gap-4">
         {/* Daily Wins */}
-        <div className="flex-1 bg-white p-2 rounded-2xl shadow-sm border border-blue-100 flex items-center justify-between px-4">
-           <div className="flex flex-col">
-             <span className="text-[10px] uppercase font-bold text-gray-400 tracking-wider">{t.dailyWins}</span>
-             <span className="text-2xl font-black text-gray-800">{dailyScore}</span>
+        <div className="flex-1 bg-sky-100 p-3 rounded-3xl border-b-4 border-sky-200 flex items-center justify-between px-4 relative overflow-hidden">
+           <div className="absolute -right-2 -top-2 w-12 h-12 bg-white opacity-20 rounded-full"></div>
+           <div className="flex flex-col z-10">
+             <span className="text-[10px] uppercase font-black text-sky-400 tracking-wider">{t.dailyWins}</span>
+             <span className="text-3xl font-black text-sky-600">{dailyScore}</span>
            </div>
-           <div className="bg-yellow-100 p-2 rounded-xl text-yellow-600">
-             <Award size={20} />
+           <div className="bg-white/50 p-2 rounded-2xl text-sky-500 z-10 backdrop-blur-sm">
+             <Award size={22} />
            </div>
         </div>
         
         {/* Streak Counter */}
-        <div className="flex-1 bg-white p-2 rounded-2xl shadow-sm border border-blue-100 flex items-center justify-between px-4">
-           <div className="flex flex-col">
-             <span className="text-[10px] uppercase font-bold text-gray-400 tracking-wider">{t.streak}</span>
-             <span className="text-2xl font-black text-orange-500">{streak}</span>
+        <div className="flex-1 bg-amber-100 p-3 rounded-3xl border-b-4 border-amber-200 flex items-center justify-between px-4 relative overflow-hidden">
+           <div className="absolute -right-2 -top-2 w-12 h-12 bg-white opacity-20 rounded-full"></div>
+           <div className="flex flex-col z-10">
+             <span className="text-[10px] uppercase font-black text-amber-400 tracking-wider">{t.streak}</span>
+             <span className="text-3xl font-black text-amber-600">{streak}</span>
            </div>
-           <div className={`bg-orange-100 p-2 rounded-xl text-orange-500 ${streak > 1 ? 'animate-bounce' : ''}`}>
-             <Flame size={20} fill={streak > 1 ? "currentColor" : "none"} />
+           <div className={`bg-white/50 p-2 rounded-2xl text-amber-500 z-10 backdrop-blur-sm ${streak > 1 ? 'animate-bounce' : ''}`}>
+             <Flame size={22} fill={streak > 1 ? "currentColor" : "none"} />
            </div>
         </div>
       </div>
 
-      {/* Interactive Display Area */}
-      <div className={`w-full mb-4 relative transition-transform ${isShaking ? 'animate-shake' : ''}`}>
+      {/* Interactive Display Area - Whiteboard Look */}
+      <div className={`w-full mb-6 relative transition-transform ${isShaking ? 'animate-shake' : ''}`}>
         <div 
           ref={displayRef}
           className={`
-            w-full h-28 bg-white rounded-3xl border-[3px] flex items-center justify-center px-2 shadow-lg relative transition-all duration-300 cursor-text overflow-hidden
-            ${message.type === 'success' ? 'border-green-400 ring-4 ring-green-100' : message.type === 'error' ? 'border-red-300' : 'border-indigo-100'}
+            w-full h-32 bg-white rounded-[2rem] border-4 flex items-center justify-center px-2 shadow-xl relative transition-all duration-300 cursor-text overflow-hidden
+            ${message.type === 'success' ? 'border-green-300 ring-4 ring-green-100/50' : message.type === 'error' ? 'border-red-200' : 'border-indigo-50'}
           `}
           onClick={(e) => {
              if (e.target === displayRef.current) {
@@ -310,12 +312,6 @@ const App: React.FC = () => {
              }
           }}
         >
-            {/* Decoration circles in corners */}
-            <div className="absolute top-2 left-2 w-2 h-2 rounded-full bg-gray-200"></div>
-            <div className="absolute top-2 right-2 w-2 h-2 rounded-full bg-gray-200"></div>
-            <div className="absolute bottom-2 left-2 w-2 h-2 rounded-full bg-gray-200"></div>
-            <div className="absolute bottom-2 right-2 w-2 h-2 rounded-full bg-gray-200"></div>
-
             <div className="flex items-center flex-wrap justify-center w-full h-full pointer-events-none z-10">
               <div className="flex flex-wrap justify-center items-center pointer-events-auto">
                 {cursorIndex === 0 && <Cursor />}
@@ -328,9 +324,9 @@ const App: React.FC = () => {
                         handleSetCursor(e.clientX - rect.left < rect.width / 2 ? idx : idx + 1);
                       }}
                       className={`
-                        text-4xl font-bold tracking-wide cursor-pointer hover:scale-110 transition-transform
+                        text-5xl font-bold tracking-wide cursor-pointer hover:scale-110 transition-transform
                         py-2 px-0.5 select-none
-                        ${token.type === 'operator' ? 'text-blue-500 px-1' : 'text-gray-800'}
+                        ${token.type === 'operator' ? 'text-blue-400 px-2' : 'text-gray-700'}
                       `}
                     >
                       {token.value === '*' ? '×' : token.value === '/' ? '÷' : token.value}
@@ -341,7 +337,7 @@ const App: React.FC = () => {
               </div>
               
               {tokens.length === 0 && cursorIndex === 0 && (
-                 <span className="text-gray-300 text-2xl font-bold absolute pointer-events-none opacity-40">{t.make24}</span>
+                 <span className="text-gray-300 text-2xl font-bold absolute pointer-events-none opacity-60">{t.make24}</span>
               )}
             </div>
         </div>
@@ -349,18 +345,18 @@ const App: React.FC = () => {
         {/* Message Bubble */}
         <div className={`
           absolute -bottom-3 left-0 right-0 mx-auto w-max max-w-[90%] 
-          text-xs sm:text-sm font-bold px-4 py-1.5 rounded-full shadow-md flex items-center justify-center z-20
-          transition-all duration-300 transform
+          text-xs sm:text-sm font-bold px-6 py-2 rounded-full shadow-lg flex items-center justify-center z-20
+          transition-all duration-300 transform border-2 border-white/50
           ${message.type === 'success' ? 'bg-green-500 text-white scale-105' : 
-            message.type === 'error' ? 'bg-red-500 text-white' : 
-            message.type === 'info' ? 'bg-indigo-500 text-white' : 'bg-gray-200 text-gray-500 opacity-0 translate-y-2'}
+            message.type === 'error' ? 'bg-red-400 text-white' : 
+            message.type === 'info' ? 'bg-indigo-400 text-white' : 'bg-gray-200 text-gray-500 opacity-0 translate-y-2'}
         `}>
           {message.text}
         </div>
       </div>
 
       {/* Cards Grid */}
-      <div className="grid grid-cols-4 gap-2 sm:gap-4 mb-2 w-full justify-items-center flex-grow items-center content-center px-1">
+      <div className="grid grid-cols-4 gap-3 mb-4 w-full justify-items-center flex-grow items-center content-center px-1">
         {cards.map((card) => (
           <Card 
             key={card.id} 
@@ -374,7 +370,7 @@ const App: React.FC = () => {
 
       {/* Controls Panel */}
       <div className="w-full mt-auto">
-        {/* Operators Row */}
+        {/* Operators Row - Chunky Buttons */}
         <div className="grid grid-cols-4 gap-3 mb-3 px-2">
           {operatorButtons.map((btn) => (
              <button
@@ -383,8 +379,8 @@ const App: React.FC = () => {
                disabled={!isPlaying}
                className={`
                  aspect-square sm:h-16 sm:w-auto ${btn.color} 
-                 text-3xl font-black rounded-2xl transition-all active:scale-90 disabled:opacity-50 disabled:grayscale
-                 flex items-center justify-center shadow-[0_4px_0_rgb(0,0,0,0.1)] active:shadow-none active:translate-y-[4px] border-b-4
+                 text-3xl font-black rounded-3xl transition-all active:scale-90 disabled:opacity-50 disabled:grayscale
+                 flex items-center justify-center shadow-[0_4px_0_rgba(0,0,0,0.05)] active:shadow-none active:translate-y-[4px] border-b-4
                `}
              >
                {btn.label || btn.op}
@@ -399,7 +395,7 @@ const App: React.FC = () => {
                key={op}
                onClick={() => handleInsertToken(op, 'operator')}
                disabled={!isPlaying}
-               className="aspect-square bg-white text-gray-400 hover:text-gray-600 hover:bg-gray-50 text-xl font-bold rounded-xl transition active:scale-90 disabled:opacity-50 flex items-center justify-center shadow-sm border border-gray-200"
+               className="aspect-square bg-white text-gray-400 hover:text-gray-600 hover:bg-gray-50 text-xl font-bold rounded-2xl transition active:scale-90 disabled:opacity-50 flex items-center justify-center shadow-sm border-b-4 border-gray-100"
              >
                {op}
              </button>
@@ -408,7 +404,7 @@ const App: React.FC = () => {
            <button
              onClick={() => handleMoveCursor('left')}
              disabled={cursorIndex === 0 || !isPlaying}
-             className="aspect-square bg-white text-gray-500 hover:bg-gray-50 rounded-xl flex items-center justify-center transition active:scale-90 disabled:opacity-30 shadow-sm border border-gray-200"
+             className="aspect-square bg-white text-gray-500 hover:bg-gray-50 rounded-2xl flex items-center justify-center transition active:scale-90 disabled:opacity-30 shadow-sm border-b-4 border-gray-100"
            >
              <ArrowLeft size={22} />
            </button>
@@ -416,7 +412,7 @@ const App: React.FC = () => {
            <button
              onClick={() => handleMoveCursor('right')}
              disabled={cursorIndex === tokens.length || !isPlaying}
-             className="aspect-square bg-white text-gray-500 hover:bg-gray-50 rounded-xl flex items-center justify-center transition active:scale-90 disabled:opacity-30 shadow-sm border border-gray-200"
+             className="aspect-square bg-white text-gray-500 hover:bg-gray-50 rounded-2xl flex items-center justify-center transition active:scale-90 disabled:opacity-30 shadow-sm border-b-4 border-gray-100"
            >
              <ArrowRight size={22} />
            </button>
@@ -424,7 +420,7 @@ const App: React.FC = () => {
            <button
              onClick={handleBackspace}
              disabled={cursorIndex === 0 || !isPlaying}
-             className="aspect-square bg-red-50 text-red-400 hover:bg-red-100 rounded-xl flex items-center justify-center transition active:scale-90 disabled:opacity-30 shadow-sm border border-red-100"
+             className="aspect-square bg-rose-50 text-rose-400 hover:bg-rose-100 rounded-2xl flex items-center justify-center transition active:scale-90 disabled:opacity-30 shadow-sm border-b-4 border-rose-100"
            >
              <Delete size={22} />
            </button>
@@ -436,7 +432,7 @@ const App: React.FC = () => {
             <>
               <button 
                 onClick={handleClear}
-                className="col-span-1 bg-white text-gray-400 hover:text-gray-600 h-14 rounded-2xl flex items-center justify-center transition active:scale-95 shadow-sm border border-gray-200"
+                className="col-span-1 bg-white text-gray-400 hover:text-gray-600 h-16 rounded-3xl flex items-center justify-center transition active:scale-95 shadow-sm border-b-4 border-gray-200"
               >
                 <Eraser size={24} />
               </button>
@@ -444,21 +440,21 @@ const App: React.FC = () => {
               <button
                 onClick={checkResult}
                 disabled={usedCardIds.length !== 4}
-                className="col-span-2 bg-gradient-to-b from-blue-500 to-blue-600 text-white h-14 rounded-2xl text-xl font-black shadow-[0_6px_0_#1e40af] active:shadow-none active:translate-y-[6px] border-b-0 flex items-center justify-center gap-2 transition-all disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed disabled:translate-y-0"
+                className="col-span-2 bg-gradient-to-b from-sky-400 to-sky-500 text-white h-16 rounded-3xl text-2xl font-black shadow-[0_6px_0_#0ea5e9] active:shadow-none active:translate-y-[6px] border-b-0 flex items-center justify-center gap-2 transition-all disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed disabled:translate-y-0"
               >
                 {t.submit}
               </button>
               
-              <div className="col-span-1 flex flex-col gap-2">
+              <div className="col-span-1 flex flex-col gap-2 h-16">
                 <button 
                   onClick={() => getLocalHint('hint')}
-                  className="flex-1 bg-yellow-100 text-yellow-600 rounded-xl font-bold text-xs flex items-center justify-center transition active:scale-95 hover:bg-yellow-200"
+                  className="flex-1 bg-amber-100 text-amber-500 rounded-xl font-bold text-xs flex items-center justify-center transition active:scale-95 hover:bg-amber-200 border-b-2 border-amber-200"
                 >
                    <Lightbulb size={20} />
                 </button>
                 <button 
                   onClick={() => getLocalHint('solve')}
-                  className="flex-1 bg-indigo-100 text-indigo-600 rounded-xl font-bold text-xs flex items-center justify-center transition active:scale-95 hover:bg-indigo-200"
+                  className="flex-1 bg-indigo-100 text-indigo-500 rounded-xl font-bold text-xs flex items-center justify-center transition active:scale-95 hover:bg-indigo-200 border-b-2 border-indigo-200"
                 >
                    <Info size={20} />
                 </button>
@@ -467,9 +463,9 @@ const App: React.FC = () => {
           ) : (
              <button
               onClick={startNewGame}
-              className="col-span-4 bg-gradient-to-b from-green-500 to-green-600 text-white h-16 rounded-2xl text-2xl font-black flex items-center justify-center gap-2 shadow-[0_6px_0_#15803d] active:shadow-none active:translate-y-[6px] transition-all animate-pop"
+              className="col-span-4 bg-gradient-to-b from-emerald-400 to-emerald-500 text-white h-20 rounded-3xl text-3xl font-black flex items-center justify-center gap-3 shadow-[0_8px_0_#10b981] active:shadow-none active:translate-y-[8px] transition-all animate-pop"
              >
-               <Play size={28} fill="currentColor" /> {t.nextCard}
+               <Play size={32} fill="currentColor" /> {t.nextCard}
              </button>
           )}
         </div>
@@ -477,43 +473,43 @@ const App: React.FC = () => {
 
       {/* How to Play Modal */}
       {showHelp && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-in fade-in duration-200">
-           <div className="bg-white w-full max-w-sm rounded-3xl shadow-2xl p-6 relative transform transition-all scale-100 animate-pop border-4 border-blue-100">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/30 backdrop-blur-sm animate-in fade-in duration-200">
+           <div className="bg-white w-full max-w-sm rounded-[2rem] shadow-2xl p-6 relative transform transition-all scale-100 animate-pop border-8 border-sky-100">
              <button 
                onClick={() => { playSound('click'); setShowHelp(false); }}
-               className="absolute right-4 top-4 text-gray-400 hover:text-gray-600 bg-gray-50 rounded-full p-1"
+               className="absolute right-4 top-4 text-gray-400 hover:text-gray-600 bg-gray-50 rounded-full p-2"
              >
                <X size={24} />
              </button>
              
              <div className="flex flex-col items-center text-center">
-               <div className="bg-blue-100 p-3 rounded-full text-blue-600 mb-4">
-                 <HelpCircle size={32} />
+               <div className="bg-sky-100 p-4 rounded-full text-sky-500 mb-4">
+                 <HelpCircle size={40} />
                </div>
-               <h2 className="text-xl font-black text-gray-800 mb-4">{t.helpTitle}</h2>
+               <h2 className="text-2xl font-black text-gray-800 mb-4">{t.helpTitle}</h2>
                
                <div className="space-y-3 text-left w-full">
-                 <div className="flex gap-3 items-center bg-blue-50 p-3 rounded-2xl border border-blue-100">
-                   <span className="bg-blue-500 text-white font-black w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 text-sm shadow-sm">1</span>
+                 <div className="flex gap-3 items-center bg-sky-50 p-3 rounded-2xl border-2 border-sky-100">
+                   <span className="bg-sky-400 text-white font-black w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 text-lg shadow-sm">1</span>
                    <p className="text-sm text-gray-700 font-bold leading-tight">{t.helpStep1}</p>
                  </div>
-                 <div className="flex gap-3 items-center bg-purple-50 p-3 rounded-2xl border border-purple-100">
-                   <span className="bg-purple-500 text-white font-black w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 text-sm shadow-sm">2</span>
+                 <div className="flex gap-3 items-center bg-purple-50 p-3 rounded-2xl border-2 border-purple-100">
+                   <span className="bg-purple-400 text-white font-black w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 text-lg shadow-sm">2</span>
                    <p className="text-sm text-gray-700 font-bold leading-tight">{t.helpStep2}</p>
                  </div>
-                 <div className="flex gap-3 items-center bg-orange-50 p-3 rounded-2xl border border-orange-100">
-                   <span className="bg-orange-500 text-white font-black w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 text-sm shadow-sm">3</span>
+                 <div className="flex gap-3 items-center bg-amber-50 p-3 rounded-2xl border-2 border-amber-100">
+                   <span className="bg-amber-400 text-white font-black w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 text-lg shadow-sm">3</span>
                    <p className="text-sm text-gray-700 font-bold leading-tight">{t.helpStep3}</p>
                  </div>
-                 <div className="flex gap-3 items-center bg-green-50 p-3 rounded-2xl border border-green-100">
-                   <span className="bg-green-500 text-white font-black w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 text-sm shadow-sm">4</span>
+                 <div className="flex gap-3 items-center bg-emerald-50 p-3 rounded-2xl border-2 border-emerald-100">
+                   <span className="bg-emerald-400 text-white font-black w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 text-lg shadow-sm">4</span>
                    <p className="text-sm text-gray-700 font-bold leading-tight">{t.helpStep4}</p>
                  </div>
                </div>
                
                <button 
                  onClick={() => { playSound('click'); setShowHelp(false); }}
-                 className="mt-6 w-full py-3 bg-gray-800 text-white rounded-2xl font-bold shadow-lg active:scale-95 transition"
+                 className="mt-6 w-full py-4 bg-gray-800 text-white rounded-2xl font-bold shadow-lg active:scale-95 transition text-lg"
                >
                  {t.close}
                </button>
