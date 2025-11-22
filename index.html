@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -12,6 +13,8 @@
     <meta name="theme-color" content="#FFFDF5">
     
     <link rel="manifest" href="/manifest.json">
+    <!-- Use a remote calculator icon so it works instantly without downloading files -->
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3771/3771518.png">
     
     <title>24点 (Math 24)</title>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -24,7 +27,7 @@
         /* Handle safe areas for iPhone notch/home bar */
         padding-top: env(safe-area-inset-top);
         padding-bottom: env(safe-area-inset-bottom);
-        /* Fun background pattern - Warm Cream (Dots removed) */
+        /* Fun background pattern - Warm Cream */
         background-color: #FFFDF5;
       }
       
@@ -63,18 +66,22 @@
         background: transparent;
       }
     </style>
-  <script type="importmap">
+<script type="importmap">
 {
   "imports": {
     "react": "https://aistudiocdn.com/react@^19.2.0",
     "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
     "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0"
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
+    "vite": "https://aistudiocdn.com/vite@^7.2.4",
+    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.1"
   }
 }
 </script>
 </head>
   <body class="text-gray-800 antialiased h-screen w-screen overflow-hidden select-none">
     <div id="root" class="h-full w-full overflow-y-auto"></div>
+    <!-- This is the entry point for Vite build -->
+    <script type="module" src="/index.tsx"></script>
   </body>
 </html>
