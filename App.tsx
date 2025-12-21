@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { PlayingCard, Difficulty, Language, ExpressionToken } from './types';
 import { drawCards, evaluateExpression, solve24 } from './utils/gameLogic';
@@ -222,7 +221,7 @@ const App: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col items-center py-2 px-4 max-w-md mx-auto font-sans select-none">
+    <div className="min-h-screen flex flex-col items-center py-2 px-4 max-w-md mx-auto font-sans select-none pt-safe pb-safe pl-safe pr-safe">
       {showConfetti && <Confetti />}
 
       {/* Top Bar: Settings & Timer */}
@@ -427,7 +426,7 @@ const App: React.FC = () => {
         </div>
 
         {/* Main Action Buttons */}
-        <div className="grid grid-cols-4 gap-3 pb-safe px-2">
+        <div className="grid grid-cols-4 gap-3 px-2">
           {isPlaying ? (
             <>
               <button 
